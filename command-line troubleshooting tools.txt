@@ -1,0 +1,26 @@
+command-line troubleshooting tools
+The tmsh and tmctl utilities include commands for troubleshooting device trust and device group operations. For detailed reference material on tmsh commands, see the F5 Networks® knowledge base at http://support.f5.com.
+
+Table 1. Useful command-line troubleshooting tools
+Command	Description
+tmsh run cm sniff-updates	Displays the commit ID updates that occur over the configuration management communications channel.
+tmsh run cm watch-devicegroup-device	Displays information about the devices in the device group to which the local device belongs.
+tmsh run cm watch-sys-device	Displays information about the local device.
+tmsh run cm watch-trafficgroup-device	Displays information about the traffic groups associated with devices in a device group.
+tmsh sys db configsync.timesyncthreshold	Displays the time threshold for the time difference between devices in the trust domain. If the time difference between devices exceeds the configured threshold value, the BIG-IP system logs an error.
+tmsh show cm device	Displays the time difference, in seconds, between the local device and each of the other devices in the trust domain.
+tmsh show cm traffic-group	Displays status for all traffic groups on the local device, including the next-active device, the previously-active device, and the reason that an active traffic group is active on its current device. This information is also available with the tmsh cm traffic-group all-properties command.
+tmsh show cm sync-status	Displays the current network connection status, either connected or disconnected.
+tmsh show sys ha-mirror	Displays the current status of mirrored connections.
+tmsh show cm failover-status	In addition to other information, displays log messages when:
+The local device first receives a SOD status message on its unicast addresses and a multicast address/interface (if any).
+The local device stops receiving SOD status messages.
+An interface on the local device begins receiving SOD status messages again.
+tmctl sod_tg_conn_stat	Displays SOD messaging statistics for each type of message sent and received.
+tmctl sod_tg_msg_stat	Displays the outgoing packets from the SOD daemon to the other devices in the device group.
+tmsh modify cm trust-domain Root add-device { ca-devices true | false ip_address } device-name device_name username admin password admin	In addition to adding a device to a trust domain, returns error messages for these conditions:
+A device with the specified device name already exists in the trust domain.
+The BIG-IP software version (including hotfix version) on the specified device does not match the version on the local device.
+The time on the specified device is out of sync with the current device by some number of seconds.
+A config sync address is not configured on the specified device.
+ 
